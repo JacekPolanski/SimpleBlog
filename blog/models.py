@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Subject(models.Model):
+class Topic(models.Model):
     title = models.CharField(max_length=100)
 
     def __str__(self):
@@ -9,7 +9,7 @@ class Subject(models.Model):
 
 
 class Post(models.Model):
-    subject = models.ForeignKey(Subject)
+    subject = models.ForeignKey(Topic)
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
     date_added = models.DateTimeField('date added')
