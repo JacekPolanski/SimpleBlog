@@ -1,0 +1,13 @@
+{% if latest_topics_list %}
+    <ul>
+        {% for topic in latest_topics_list %}
+            <li>
+                <a href="/blog/{{ topic.id }}/">
+                    {{ topic.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Brak topików</p>
+{% endif %}
