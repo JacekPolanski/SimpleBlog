@@ -1,6 +1,4 @@
-import pprint
-from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Topic, Post
 
 
@@ -15,11 +13,7 @@ def index(request):
 
 
 def detail(request, topic_id):
-    try:
-        topic = Topic.objects.get(id = topic_id)
-    except Topic.DoesNotExist:
-        raise Http404("Topic nie istnieje")
-
+    topic = get_object_or_404(Topic, pk = topic_id)
     latest_posts_list = Post.objects.filter(topic = topic_id)
 
     context = {
