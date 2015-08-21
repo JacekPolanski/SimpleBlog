@@ -1,6 +1,7 @@
-from django.http import HttpResponse
+import pprint
+from django.http import Http404
 from django.shortcuts import render
-from .models import Topic
+from .models import Topic, Post
 
 
 def index(request):
@@ -14,4 +15,16 @@ def index(request):
 
 
 def detail(request, topic_id):
-    return HttpResponse("Topic: %s." % topic_id)
+    try:
+        topic = Topic.objects.get(id = topic_id)
+    except Topic.DoesNotExist:
+        raise Http404("Topic nie istnieje")
+
+    latest_posts_list = Post.objects.filter(topic = topic_id)
+
+    context = {
+        'topic': topic,
+        'latest_posts_list': latest_posts_list,
+    }
+
+    return render(request, 'blog/detail.html', context)
