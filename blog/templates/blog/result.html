@@ -1,0 +1,9 @@
+<h1>{{ topic.title }}</h1>
+
+<ul>
+{% for post in topic.post_set.all %}
+    <li>{{ post.title }} -- {{ post.votes }} głosów</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'blog:detail' topic.id %}">Głosuj ponownie</a>

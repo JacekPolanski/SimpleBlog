@@ -1,9 +1,9 @@
 <h1>{{ topic.title }}</h1>
 <h2>{{ topic.date_added }}</h2>
 
-{% if latest_posts_list %}
+{% if topic.post_set.all %}
     <ul>
-        {% for post in latest_posts_list %}
+        {% for post in topic.post_set.all %}
             <li>
                 <p>{{ post.title }}</p>
             </li>
@@ -12,3 +12,12 @@
 {% else %}
     <p>Brak postów</p>
 {% endif %}
+
+<form action="{% url 'blog:vote' topic.id %}" method="post">
+    {% csrf_token %}
+    {% for post in topic.post_set.all %}
+        <input type="radio" name="post" id="post_{{ forloop.counter }}" value="{{ post.id }}" />
+        <label for="post_{{ forloop.counter }}">{{ post.title }}</label>
+    {% endfor %}
+    <input type="submit" value="vote" />
+</form>
