@@ -2,7 +2,7 @@
     <ul>
         {% for topic in latest_topics_list %}
             <li>
-                <a href="/blog/{{ topic.id }}/">
+                <a href="{% url 'detail' topic.id %}">
                     {{ topic.title }}
                 </a>
             </li>
