@@ -10,7 +10,7 @@ class Topic(models.Model):
 
 
 class Post(models.Model):
-    subject = models.ForeignKey(Topic)
+    topic = models.ForeignKey(Topic)
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
     date_added = models.DateTimeField('date added')
